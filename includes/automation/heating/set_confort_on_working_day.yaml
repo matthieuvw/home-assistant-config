@@ -1,0 +1,25 @@
+trigger:
+
+  - platform: time
+    at: input_datetime.confort_on_morning_working_day_time_computed
+
+  - platform: time
+    at: input_datetime.confort_on_afternoon_working_day_time
+
+condition:
+
+  condition: and
+  conditions:
+
+    - condition: state
+      entity_id: binary_sensor.workday
+      state: 'on'
+
+action:
+
+  - service: input_select.select_option
+    data:
+      entity_id:
+        - climate.thermostat_cuisine
+        - climate.thermostat_sejour
+      option: 'confort'

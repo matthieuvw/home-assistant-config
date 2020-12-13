@@ -1,0 +1,11 @@
+
+custom_holiday_begin:
+  name: Début des vacances
+  has_date: true
+  has_time: false
+
+custom_holiday_end:
+  name: Fin des vacances
+  has_date: true
+  has_time: false
+  

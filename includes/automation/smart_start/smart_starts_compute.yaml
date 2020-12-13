@@ -1,0 +1,20 @@
+
+trigger:
+
+  - platform: time
+    at: input_datetime.compute_smart_starts_time
+
+  - platform: state
+    entity_id: input_boolean.fil_pilote_salon
+
+action:
+
+  - service: python_script.smart_start_compute
+    data:
+      time_entity_id: input_datetime.confort_on_non_working_day_time
+      temperature_entity_id: sensor.ostricourt_temperature
+
+  - service: python_script.smart_start_compute
+    data:
+      time_entity_id: input_datetime.confort_on_morning_working_day_time_computed
+      temperature_entity_id: sensor.ostricourt_temperature

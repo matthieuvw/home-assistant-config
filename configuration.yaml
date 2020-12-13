@@ -1,0 +1,137 @@
+
+homeassistant:
+  name: Mama
+  latitude: !secret latitude
+  longitude: !secret longitude
+  unit_system: metric
+  time_zone: !secret time_zone
+  external_url: !secret external_url
+  internal_url: !secret internal_url
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+lovelace:
+  mode: storage
+  dashboards:
+    lovelace-yaml:
+      mode: yaml
+      title: Chauffage
+      icon: mdi:script
+      show_in_sidebar: true
+      filename: dashboards/heating.yaml
+
+logger:
+  default: info
+
+python_script:
+
+influxdb:
+  host: !secret influxdb_host
+  port: !secret influxdb_port
+  database: 'hass'
+  include:
+    domains:
+      - input_number
+      - climate
+      - sensor
+  tags:
+    instance: !secret instance
+    source: hass
+
+sensor:
+
+  - platform: template
+    sensors:
+
+      # Template sensors for mappping
+      # states string to numeric value
+      # in order to report to grafana/influxdb
+
+      climate_thermostat_salon_numeric_state:
+        value_template: >
+          {% if state_attr("climate.thermostat_salon", "hvac_action") == "heating" %} 1
+          {% else %} 0
+          {% endif %}
+
+      climate_thermostat_cuisine_numeric_state:
+        value_template: >
+          {% if state_attr("climate.thermostat_cuisine", "hvac_action") == "heating" %} 1
+          {% else %} 0
+          {% endif %}
+
+      climate_thermostat_sejour_numeric_state:
+        value_template: >
+          {% if state_attr("climate.thermostat_sejour", "hvac_action") == "heating" %} 1
+          {% else %} 0
+          {% endif %}
+
+      climate_thermostat_chambre_colin_numeric_state:
+        value_template: >
+          {% if state_attr("climate.thermostat_chambre_colin", "hvac_action") == "heating" %} 1
+          {% else %} 0
+          {% endif %}
+
+climate:
+
+  - platform: generic_thermostat
+    name: thermostat_salon
+    heater: input_boolean.fil_pilote_salon
+    target_sensor: input_number.fake_sonde_temperature_salon
+    min_temp: 12
+    max_temp: 25
+    target_temp: 20
+    away_temp: 17
+    cold_tolerance: 0
+    hot_tolerance: 1
+    min_cycle_duration:
+      seconds: 4
+
+  - platform: generic_thermostat
+    name: thermostat_cuisine
+    heater: input_boolean.fil_pilote_cuisine
+    target_sensor: input_number.fake_sonde_temperature_cuisine
+    min_temp: 12
+    max_temp: 25
+    target_temp: 20
+    away_temp: 17
+    cold_tolerance: 0
+    hot_tolerance: 1
+    min_cycle_duration:
+      seconds: 4
+
+  - platform: generic_thermostat
+    name: thermostat_sejour
+    heater: input_boolean.fil_pilote_sejour
+    target_sensor: input_number.fake_sonde_temperature_sejour
+    min_temp: 12
+    max_temp: 25
+    target_temp: 20
+    away_temp: 17
+    cold_tolerance: 0
+    hot_tolerance: 1
+    min_cycle_duration:
+      seconds: 4
+
+  - platform: generic_thermostat
+    name: thermostat_chambre_colin
+    heater: input_boolean.fil_pilote_chambre_colin
+    target_sensor: input_number.fake_sonde_temperature_chambre_colin
+    min_temp: 12
+    max_temp: 25
+    target_temp: 20
+    away_temp: 17
+    cold_tolerance: 0
+    hot_tolerance: 1
+    min_cycle_duration:
+      seconds: 4
+
+meteo_france:
+  - city: !secret wheater_city
+
+binary_sensor: !include_dir_merge_list includes/binary_sensor/
+automation: !include_dir_list includes/automation/
+input_datetime: !include_dir_merge_named includes/input_datetime
+input_boolean: !include_dir_merge_named includes/input_boolean
+input_select: !include_dir_merge_named includes/input_select
+input_number: !include_dir_merge_named includes/input_number

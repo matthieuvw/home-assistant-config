@@ -1,0 +1,11 @@
+trigger:
+
+  - platform: time
+    at: input_datetime.eco_every_night_time
+
+action:
+
+  - service: input_select.select_option
+    data:
+      entity_id: all
+      option: 'eco'

@@ -1,0 +1,28 @@
+
+thermostat_salon_mode:
+  name: Mode thermostat salon
+  icon: mdi:home-minus
+  options:
+    - confort
+    - eco
+
+thermostat_cuisine_mode:
+  name: Mode thermostat salon
+  icon: mdi:home-minus
+  options:
+    - confort
+    - eco
+
+thermostat_sejour_mode:
+  name: Mode thermostat salon
+  icon: mdi:home-minus
+  options:
+    - confort
+    - eco
+
+thermostat_chambre_colin_mode:
+  name: Mode thermostat salon
+  icon: mdi:home-minus
+  options:
+    - confort
+    - eco

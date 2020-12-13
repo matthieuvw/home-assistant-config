@@ -1,0 +1,6 @@
+
+bathroom_heater_time:
+  name: Radiateur salle de bain
+  has_date: false
+  has_time: true
+  initial: '05:30'
