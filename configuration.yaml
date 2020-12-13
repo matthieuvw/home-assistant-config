@@ -15,7 +15,13 @@ switch:
   - platform: command_line
     switches:
       git_pull_switch:
-        command_on: 'git -C /config pull'
+        command_on: 'git -C /config pull > /config/git_pull_command_output.txt'
+
+sensor:
+  - platform: command_line
+    name: git_pull_sensor
+    command: 'cat /config/git_pull_command_output.txt'
+
         
 lovelace:
   mode: storage
