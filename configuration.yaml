@@ -11,6 +11,12 @@ homeassistant:
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
+switch:
+  - platform: command_line
+    switches:
+      git_pull_switch:
+        command_on: 'git -C /config pull'
+        
 lovelace:
   mode: storage
   dashboards:
