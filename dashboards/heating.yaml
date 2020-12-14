@@ -1,5 +1,128 @@
-title: Chauffage
-views:
-  - path: default_view
-    title: Home
+resources:
+    - url: /local/simple-thermostat.js?v=1
+      type: module
 
+views:
+  - title: Thermostats
+    panel: true
+    path: thermostats
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+
+          - type: 'custom:simple-thermostat'
+            name: Salon
+            entity: climate.thermostat_salon
+            show_header: true
+            control: false
+            sensors:
+              - entity: input_select.thermostat_salon_mode
+                name: mode
+
+          - type: 'custom:simple-thermostat'
+            name: Séjour
+            entity: climate.thermostat_sejour
+            show_header: true
+            control: false
+            sensors:
+              - entity: input_select.thermostat_sejour_mode
+                name: mode
+
+          - type: 'custom:simple-thermostat'
+            name: Cuisine
+            entity: climate.thermostat_cuisine
+            show_header: true
+            control: false
+            sensors:
+              - entity: input_select.thermostat_cuisine_mode
+                name: mode
+          
+          - type: 'custom:simple-thermostat'
+            name: Chambre Colin
+            entity: climate.thermostat_chambre_colin
+            show_header: true
+            control: false
+            sensors:
+              - entity: input_select.thermostat_chambre_colin_mode
+                name: mode
+  - title: Horaires
+    path: pouet
+    panel: true
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: input_datetime.eco_every_night_time
+              - entity: input_datetime.bathroom_heater_time
+            title: Tous les jours
+          - type: entities
+            entities:
+              - entity: input_datetime.confort_on_non_working_day_time
+            title: 'Jours à la maison (week-ends, fériés, vacances)'
+          - type: entities
+            entities:
+              - entity: input_datetime.confort_on_morning_working_day_time
+              - entity: input_datetime.eco_on_morning_working_day_time
+              - entity: input_datetime.confort_on_afternoon_working_day_time
+            title: Jours travaillés
+  - title: Vacances
+    path: vacances
+    panel: true
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - entity: input_datetime.custom_holiday_begin
+          - entity: input_datetime.custom_holiday_end
+        title: Date des vacances (ou présence exceptionnelle à la maison)
+  - title: Consignes
+    path: consignes
+    panel: true
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: input_number.thermostat_salon_mode_confort
+              - entity: input_number.thermostat_salon_mode_eco
+            title: Salon
+          - type: entities
+            entities:
+              - entity: input_number.thermostat_cuisine_mode_confort
+              - entity: input_number.thermostat_cuisine_mode_eco
+            title: Cuisine
+          - type: entities
+            entities:
+              - entity: input_number.thermostat_sejour_mode_confort
+              - entity: input_number.thermostat_sejour_mode_eco
+            title: Séjour
+          - type: entities
+            entities:
+              - entity: input_number.thermostat_chambre_colin_mode_confort
+              - entity: input_number.thermostat_chambre_colin_mode_eco
+            title: Chambre Colin
+  - title: Contrôles
+    path: controles
+    panel: true
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: input_datetime.confort_on_non_working_day_time_computed
+              - entity: input_datetime.confort_on_morning_working_day_time_computed
+            title: >-
+              Horaires de confort recalculés en fonction de la température
+              extérieure
+          - type: entities
+            entities:
+              - entity: binary_sensor.workday_base
+                name: Sommes-nous un jour travaillé ?
+              - entity: binary_sensor.workday
+                name: Sommes-nous un jour travaillé (avec calcul vacances) ?
+            title: Calcul jours travaillés

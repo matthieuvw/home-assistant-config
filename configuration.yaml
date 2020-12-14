@@ -19,14 +19,19 @@ switch:
 
         
 lovelace:
+
   mode: storage
+  # add resource /local/simple-thermostat.js?v=1
+
   dashboards:
-    lovelace-yaml:
-      mode: yaml
+
+    heating-dashboard:
+
       title: Chauffage
-      icon: mdi:script
-      show_in_sidebar: true
       filename: dashboards/heating.yaml
+      mode: yaml
+      icon: mdi:radiator
+      show_in_sidebar: true
 
 logger:
   default: info
@@ -48,11 +53,21 @@ influxdb:
 
 sensor:
 
-  # Git pull output
+  - platform: rest
+    name: jeedom_temperature_sejour
+    resource: !secret jeedom_temperature_sejour_url
 
-  - platform: command_line
-    name: git_pull_sensor
-    command: 'touch /config/git_pull_command_output.txt && cat /config/git_pull_command_output.txt'
+  - platform: rest
+    name: jeedom_temperature_cuisine
+    resource: !secret jeedom_temperature_cuisine_url
+
+  - platform: rest
+    name: jeedom_temperature_salon
+    resource: !secret jeedom_temperature_salon_url
+
+  - platform: rest
+    name: jeedom_temperature_chambre_colin
+    resource: !secret jeedom_temperature_chambre_colin_url
 
   - platform: template
     sensors:
@@ -90,7 +105,7 @@ climate:
   - platform: generic_thermostat
     name: thermostat_salon
     heater: input_boolean.fil_pilote_salon
-    target_sensor: input_number.fake_sonde_temperature_salon
+    target_sensor: sensor.jeedom_temperature_salon
     min_temp: 12
     max_temp: 25
     target_temp: 20
@@ -103,7 +118,7 @@ climate:
   - platform: generic_thermostat
     name: thermostat_cuisine
     heater: input_boolean.fil_pilote_cuisine
-    target_sensor: input_number.fake_sonde_temperature_cuisine
+    target_sensor: sensor.jeedom_temperature_cuisine
     min_temp: 12
     max_temp: 25
     target_temp: 20
@@ -116,7 +131,7 @@ climate:
   - platform: generic_thermostat
     name: thermostat_sejour
     heater: input_boolean.fil_pilote_sejour
-    target_sensor: input_number.fake_sonde_temperature_sejour
+    target_sensor: sensor.jeedom_temperature_sejour
     min_temp: 12
     max_temp: 25
     target_temp: 20
@@ -129,7 +144,7 @@ climate:
   - platform: generic_thermostat
     name: thermostat_chambre_colin
     heater: input_boolean.fil_pilote_chambre_colin
-    target_sensor: input_number.fake_sonde_temperature_chambre_colin
+    target_sensor: sensor.jeedom_temperature_chambre_colin
     min_temp: 12
     max_temp: 25
     target_temp: 20

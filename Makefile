@@ -1,3 +1,7 @@
+SHELL=/bin/bash
+
+PUID := $(shell id -u)
+GUID := $(shell id -g)
 
 start:
 
@@ -6,8 +10,8 @@ start:
 		-v  $(PWD):/config \
 		-e TZ="Europe/Paris" \
 		--net=host \
-		-e PUID=$(id -u) \
-		-e guid=$(id -g) \
+		-e PUID=${PUID} \
+		-e GUID=${GUID} \
 		homeassistant/home-assistant:latest
 
 stop:
