@@ -1,56 +1,56 @@
 
 thermostat_salon_mode_confort:
   name: Confort
-  initial: 25
+  initial: 21
   min: 12
   max: 25
   step: 0.5
 
 thermostat_salon_mode_eco:
   name: Eco
-  initial: 12
+  initial: 18
   min: 12
   max: 25
   step: 0.5
 
 thermostat_cuisine_mode_confort:
   name: Confort
-  initial: 24
+  initial: 21
   min: 12
   max: 25
   step: 0.5
 
 thermostat_cuisine_mode_eco:
   name: Eco
-  initial: 13
+  initial: 18.5
   min: 12
   max: 25
   step: 0.5
 
 thermostat_sejour_mode_confort:
   name: Confort
-  initial: 23
+  initial: 21
   min: 12
   max: 25
   step: 0.5
 
 thermostat_sejour_mode_eco:
   name: Eco
-  initial: 14
+  initial: 18
   min: 12
   max: 25
   step: 0.5
 
 thermostat_chambre_colin_mode_confort:
   name: Confort
-  initial: 22
+  initial: 18
   min: 12
   max: 25
   step: 0.5
 
 thermostat_chambre_colin_mode_eco:
   name: Eco
-  initial: 12.5
+  initial: 16
   min: 12
   max: 25
   step: 0.5
