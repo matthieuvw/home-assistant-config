@@ -20,7 +20,7 @@ switch:
 sensor:
   - platform: command_line
     name: git_pull_sensor
-    command: 'cat /config/git_pull_command_output.txt'
+    command: 'touch /config/git_pull_command_output.txt && cat /config/git_pull_command_output.txt'
 
         
 lovelace:
