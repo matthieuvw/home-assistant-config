@@ -17,11 +17,6 @@ switch:
       git_pull_switch:
         command_on: 'git -C /config pull > /config/git_pull_command_output.txt'
 
-sensor:
-  - platform: command_line
-    name: git_pull_sensor
-    command: 'touch /config/git_pull_command_output.txt && cat /config/git_pull_command_output.txt'
-
         
 lovelace:
   mode: storage
@@ -52,6 +47,12 @@ influxdb:
     source: hass
 
 sensor:
+
+  # Git pull output
+
+  - platform: command_line
+    name: git_pull_sensor
+    command: 'touch /config/git_pull_command_output.txt && cat /config/git_pull_command_output.txt'
 
   - platform: template
     sensors:
