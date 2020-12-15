@@ -1,3 +1,4 @@
+alias: "Confort jours non travaillés"
 trigger:
 
   platform: time

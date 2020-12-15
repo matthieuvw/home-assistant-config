@@ -1,4 +1,4 @@
-
+alias: "Les modes des thermostats"
 trigger:
 
   - platform: state

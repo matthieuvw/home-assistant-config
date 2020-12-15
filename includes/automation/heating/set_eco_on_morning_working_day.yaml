@@ -1,3 +1,4 @@
+alias: "Eco le matin des jours travaillés"
 trigger:
 
   - platform: time

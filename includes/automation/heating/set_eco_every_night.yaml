@@ -1,3 +1,4 @@
+alias: "Eco tous les soirs"
 trigger:
 
   - platform: time
