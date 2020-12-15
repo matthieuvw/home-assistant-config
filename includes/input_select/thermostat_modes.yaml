@@ -7,21 +7,21 @@ thermostat_salon_mode:
     - eco
 
 thermostat_cuisine_mode:
-  name: Mode thermostat salon
+  name: Mode thermostat cuisine
   icon: mdi:home-minus
   options:
     - confort
     - eco
 
 thermostat_sejour_mode:
-  name: Mode thermostat salon
+  name: Mode thermostat séjour
   icon: mdi:home-minus
   options:
     - confort
     - eco
 
 thermostat_chambre_colin_mode:
-  name: Mode thermostat salon
+  name: Mode thermostat chambre Colin
   icon: mdi:home-minus
   options:
     - confort
