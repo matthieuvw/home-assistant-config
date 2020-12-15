@@ -15,6 +15,7 @@ confort_on_non_working_day_time_computed:
   name: Heure de passage en confort les jours non travaillés (calculée)
   has_date: false
   has_time: true
+  initial: '06:30'
 
 confort_on_morning_working_day_time:
   name: Heure de passage en confort le matin des jours travaillés
@@ -26,6 +27,7 @@ confort_on_morning_working_day_time_computed:
   name: Heure de passage en confort le matin des jours travaillés (calculée)
   has_date: false
   has_time: true
+  initial: '05:30'
 
 eco_on_morning_working_day_time:
   name: Heure de passage en éco le matin des jours travaillés
