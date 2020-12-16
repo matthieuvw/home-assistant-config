@@ -18,7 +18,7 @@ action:
   - service: input_select.select_option
     data:
       entity_id:
-        - climate.thermostat_salon
-        - climate.thermostat_cuisine
-        - climate.thermostat_sejour
+        - input_select.thermostat_salon_mode
+        - input_select.thermostat_cuisine_mode
+        - input_select.thermostat_sejour_mode
       option: 'confort'
