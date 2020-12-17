@@ -1,0 +1,77 @@
+
+homeassistant:
+  customize:
+
+    binary_sensor.presence:
+      device_class: presence
+
+input_datetime:
+
+  holiday_begin_date:
+    name: Début des vacances
+    has_date: true
+    has_time: false
+
+  holiday_end_date:
+    name: Fin des vacances
+    has_date: true
+    has_time: false
+
+  teleworking_begin_date:
+    name: Début du télétravail
+    has_date: true
+    has_time: false
+
+  teleworking_end_date:
+    name: Fin du télétravail
+    has_date: true
+    has_time: false
+
+  exceptional_absence_begin_date:
+    name: Début de l'absence
+    has_date: true
+    has_time: false
+
+  exceptional_absence_end_date:
+    name: Fin de l'absence
+    has_date: true
+    has_time: false
+  
+binary_sensor:
+
+  - platform: workday
+    name: workday
+    country: FRA
+    workdays: [mon, tue, thu, fri]
+    excludes: [wed, sat, sun, holiday]
+
+  - platform: template
+    sensors:
+      
+      is_holiday_day:
+        friendly_name: "Sommes-nous en vacances ?"
+        value_template: >-
+          as_timestamp(now()) >= as_timestamp(strptime(states.input_datetime.holiday_begin_date.state, '%Y-%m-%d'))
+          and as_timestamp(now()) <= as_timestamp(strptime(states.input_datetime.holiday_end_date.state + ' 23:59:59', '%Y-%m-%d %H:%M:%S'))
+
+      is_teleworking_day:
+        friendly_name: "Sommes-nous un jour de télétravail ?"
+        value_template: >-
+          as_timestamp(now()) >= as_timestamp(strptime(states.input_datetime.teleworking_begin_date.state, '%Y-%m-%d'))
+          and as_timestamp(now()) <= as_timestamp(strptime(states.input_datetime.teleworking_end_date.state + ' 23:59:59', '%Y-%m-%d %H:%M:%S'))
+      
+      is_exceptional_absence:
+        friendly_name: "Sommes-nous absent exceptionnellement ?"
+        value_template: >-
+          as_timestamp(now()) >= as_timestamp(strptime(states.input_datetime.exceptional_absence_begin_date.state, '%Y-%m-%d'))
+          and as_timestamp(now()) <= as_timestamp(strptime(states.input_datetime.exceptional_absence_end_date.state + ' 23:59:59', '%Y-%m-%d %H:%M:%S'))
+
+      presence:
+        friendly_name: "Présence"
+        value_template: >-
+          {{ is_state('binary_sensor.is_exceptional_absence', 'off') and
+            (
+              is_state('binary_sensor.is_holiday_day', 'on')
+              or is_state('binary_sensor.is_teleworking_day', 'on')
+              or is_state('binary_sensor.workday', 'off')
+            ) }}

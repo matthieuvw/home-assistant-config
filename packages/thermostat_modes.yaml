@@ -1,0 +1,125 @@
+
+#
+# Modes
+#
+
+input_select:
+
+  thermostat_salon_mode:
+    name: Mode thermostat salon
+    icon: mdi:home-minus
+    options:
+      - confort
+      - eco
+
+  thermostat_cuisine_mode:
+    name: Mode thermostat cuisine
+    icon: mdi:home-minus
+    options:
+      - confort
+      - eco
+
+  thermostat_sejour_mode:
+    name: Mode thermostat séjour
+    icon: mdi:home-minus
+    options:
+      - confort
+      - eco
+
+  thermostat_chambre_colin_mode:
+    name: Mode thermostat chambre Colin
+    icon: mdi:home-minus
+    options:
+      - confort
+      - eco
+
+#
+# Consignes
+#
+
+input_number:
+
+  thermostat_salon_mode_confort:
+    name: Température confort salon
+    initial: 21
+    min: 12
+    max: 25
+    step: 0.5
+
+  thermostat_salon_mode_eco:
+    name: Température éco salon
+    initial: 18
+    min: 12
+    max: 25
+    step: 0.5
+
+  thermostat_cuisine_mode_confort:
+    name: Température confort cuisine
+    initial: 21
+    min: 12
+    max: 25
+    step: 0.5
+
+  thermostat_cuisine_mode_eco:
+    name: Température éco cuisine
+    initial: 18.5
+    min: 12
+    max: 25
+    step: 0.5
+
+  thermostat_sejour_mode_confort:
+    name: Température confort séjour
+    initial: 21
+    min: 12
+    max: 25
+    step: 0.5
+
+  thermostat_sejour_mode_eco:
+    name: Température éco séjour
+    initial: 18
+    min: 12
+    max: 25
+    step: 0.5
+
+  thermostat_chambre_colin_mode_confort:
+    name: Température confort chambre Colin
+    initial: 18
+    min: 12
+    max: 25
+    step: 0.5
+
+  thermostat_chambre_colin_mode_eco:
+    name: Température éco chambre Colin
+    initial: 16
+    min: 12
+    max: 25
+    step: 0.5
+  
+#
+# Gestion des changements de modes
+#
+
+automation:
+
+  alias: "Les modes des thermostats"
+  trigger:
+
+    - platform: state
+      entity_id:
+        - input_select.thermostat_salon_mode
+        - input_select.thermostat_cuisine_mode
+        - input_select.thermostat_sejour_mode
+        - input_select.thermostat_chambre_colin_mode
+
+  condition: "{{ trigger.entity_id | regex_match('input_select.thermostat_[\w_]+_mode') }}"
+
+  action:
+
+    - service: climate.set_temperature
+      data:
+        entity_id: >
+          {{ 'climate.' + trigger.entity_id.split('.')[1].replace('_mode', '') }}
+        temperature: >
+          {{ states('input_number.' + trigger.entity_id.split('.')[1] + '_' + states(trigger.entity_id)) | float }}
+
+  mode: parallel

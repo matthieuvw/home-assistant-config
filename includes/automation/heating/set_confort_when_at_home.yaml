@@ -1,4 +1,4 @@
-alias: "Confort jours non travaillés"
+alias: "Confort les jours à la maison"
 trigger:
 
   platform: time
@@ -6,12 +6,9 @@ trigger:
 
 condition:
 
-  condition: or
-  conditions:
-
-    - condition: state
-      entity_id: binary_sensor.workday
-      state: 'off'
+  - condition: state
+    entity_id: binary_sensor.presence
+    state: 'on'
 
 action:
 

@@ -1,5 +1,6 @@
 
 homeassistant:
+
   name: Mama
   latitude: !secret latitude
   longitude: !secret longitude
@@ -7,6 +8,8 @@ homeassistant:
   time_zone: !secret time_zone
   external_url: !secret external_url
   internal_url: !secret internal_url
+
+  packages: !include_dir_named packages
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
@@ -150,9 +153,6 @@ climate:
 meteo_france:
   - city: !secret wheater_city
 
-binary_sensor: !include_dir_merge_list includes/binary_sensor/
 automation: !include_dir_list includes/automation/
 input_datetime: !include_dir_merge_named includes/input_datetime
 input_boolean: !include_dir_merge_named includes/input_boolean
-input_select: !include_dir_merge_named includes/input_select
-input_number: !include_dir_merge_named includes/input_number

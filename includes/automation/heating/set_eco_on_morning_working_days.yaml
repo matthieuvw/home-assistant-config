@@ -12,6 +12,18 @@ condition:
     - condition: state
       entity_id: binary_sensor.workday
       state: 'on'
+
+    - condition: state
+      entity_id: binary_sensor.is_holiday_day
+      state: 'off'
+
+    - condition: state
+      entity_id: binary_sensor.is_teleworking_day
+      state: 'off'
+
+    - condition: state
+      entity_id: binary_sensor.is_exceptional_absence
+      state: 'off'
       
 action:
 
