@@ -37,13 +37,7 @@ python_script:
 meteo_france:
   - city: !secret wheater_city
 
-automation: !include_dir_list includes/automation/
-input_datetime: !include_dir_merge_named includes/input_datetime
-input_boolean: !include_dir_merge_named includes/input_boolean
+frontend:
 
-# TODO Tester ça pour les ressources JS
-# frontend:
-#   extra_module_url:
-#     - /local/my_module.js
-#   extra_js_url_es5:
-#     - /local/my_es5.js
+  extra_module_url:
+    - /local/simple-thermostat.js?v=1

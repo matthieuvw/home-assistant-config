@@ -1,6 +1,0 @@
-
-compute_smart_starts_time:
-  name: Heure de calcul de l'avance du chauffage
-  has_date: false
-  has_time: true
-  initial: '01:00'

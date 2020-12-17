@@ -2,5 +2,6 @@
 TODO List
 =========
 
-* Passer en packages
-* input_select.set_options > créer les options par défaut pour chaque mode ?
+- [ ] Ajouter des dashboards
+- [ ] Possiblité de configurer meteo_france avec sensor.temperature sans passer par la WebUI ?
+- [ ] smart_start > passage en script avec variables ?

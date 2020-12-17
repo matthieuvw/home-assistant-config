@@ -1,0 +1,26 @@
+input_boolean:
+
+  fake_smart_plug:
+    name: Smart plug SdB
+
+input_datetime:
+
+  bathroom_heater_time:
+    name: Radiateur salle de bain
+    has_date: false
+    has_time: true
+    initial: '05:30'
+
+automation:
+
+  alias: Allumer radiateur SdB le matin
+  trigger:
+
+    - platform: time
+      at: input_datetime.bathroom_heater_time
+
+  action:
+
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.fake_smart_plug

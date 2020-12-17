@@ -16,8 +16,8 @@ influxdb:
     source: hass
 
 # Template sensors for mappping
-# states string to numeric value
-# in order to report to grafana/influxdb
+# string states to numeric value
+# in order to report to influxdb/grafana
 
 sensor:
 

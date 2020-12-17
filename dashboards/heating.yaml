@@ -75,8 +75,8 @@ views:
     cards:
       - type: entities
         entities:
-          - entity: input_datetime.custom_holiday_begin
-          - entity: input_datetime.custom_holiday_end
+          - entity: input_datetime.holiday_begin_date
+          - entity: input_datetime.holiday_end_date
         title: Date des vacances (ou présence exceptionnelle à la maison)
   - title: Consignes
     path: consignes

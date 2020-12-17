@@ -11,6 +11,7 @@ input_select:
     options:
       - confort
       - eco
+    initial: eco
 
   thermostat_cuisine_mode:
     name: Mode thermostat cuisine
@@ -18,6 +19,7 @@ input_select:
     options:
       - confort
       - eco
+    initial: eco
 
   thermostat_sejour_mode:
     name: Mode thermostat séjour
@@ -25,6 +27,7 @@ input_select:
     options:
       - confort
       - eco
+    initial: eco
 
   thermostat_chambre_colin_mode:
     name: Mode thermostat chambre Colin
@@ -32,6 +35,7 @@ input_select:
     options:
       - confort
       - eco
+    initial: eco
 
 #
 # Consignes
@@ -111,7 +115,7 @@ automation:
         - input_select.thermostat_sejour_mode
         - input_select.thermostat_chambre_colin_mode
 
-  condition: "{{ trigger.entity_id | regex_match('input_select.thermostat_[\w_]+_mode') }}"
+  condition: "{{ trigger.entity_id | regex_match('input_select.thermostat_[\\w_]+_mode') }}"
 
   action:
 

@@ -1,0 +1,172 @@
+input_datetime:
+
+  eco_every_night_time:
+    name: Heure de passage en éco tous les jours
+    has_date: false
+    has_time: true
+    initial: '22:30'
+
+  confort_on_non_working_day_time:
+    name: Heure de passage en confort les jours non travaillés
+    has_date: false
+    has_time: true
+    initial: '06:30'
+
+  confort_on_non_working_day_time_computed:
+    name: Heure de passage en confort les jours non travaillés (calculée)
+    has_date: false
+    has_time: true
+    initial: '06:30'
+
+  confort_on_morning_working_day_time:
+    name: Heure de passage en confort le matin des jours travaillés
+    has_date: false
+    has_time: true
+    initial: '05:30'
+
+  confort_on_morning_working_day_time_computed:
+    name: Heure de passage en confort le matin des jours travaillés (calculée)
+    has_date: false
+    has_time: true
+    initial: '05:30'
+
+  eco_on_morning_working_day_time:
+    name: Heure de passage en éco le matin des jours travaillés
+    has_date: false
+    has_time: true
+    initial: '07:30'
+
+  confort_on_afternoon_working_day_time:
+    name: Heure de passage en confort le soir des jours travaillés
+    has_date: false
+    has_time: true
+    initial: '16:30'
+
+
+automation:
+
+  #
+  #
+  #
+
+  - alias: "Confort jours non travaillés"
+    trigger:
+
+      platform: time
+      at: input_datetime.confort_on_non_working_day_time_computed
+
+    condition:
+
+      - condition: state
+        entity_id: binary_sensor.presence
+        state: 'on'
+
+    action:
+
+      - service: input_select.select_option
+        data:
+          entity_id:
+            - input_select.thermostat_salon_mode
+            - input_select.thermostat_cuisine_mode
+            - input_select.thermostat_sejour_mode
+          option: 'confort'
+
+  #
+  #
+  #
+  
+  - alias: "Confort jours travaillés"
+    trigger:
+
+      - platform: time
+        at: input_datetime.confort_on_morning_working_day_time_computed
+
+      - platform: time
+        at: input_datetime.confort_on_afternoon_working_day_time
+
+    condition:
+
+      condition: and
+      conditions:
+
+        - condition: state
+          entity_id: binary_sensor.workday
+          state: 'on'
+
+        - condition: state
+          entity_id: binary_sensor.is_holiday_day
+          state: 'off'
+
+        - condition: state
+          entity_id: binary_sensor.is_teleworking_day
+          state: 'off'
+
+        - condition: state
+          entity_id: binary_sensor.is_exceptional_absence
+          state: 'off'
+
+    action:
+
+      - service: input_select.select_option
+        data:
+          entity_id:
+            - input_select.thermostat_cuisine_mode
+            - input_select.thermostat_sejour_mode
+          option: 'confort'
+
+  #
+  #
+  #
+     
+  - alias: "Eco tous les soirs"
+    trigger:
+
+      - platform: time
+        at: input_datetime.eco_every_night_time
+
+    action:
+
+      - service: input_select.select_option
+        data:
+          entity_id: all
+          option: 'eco'
+
+  #
+  #
+  #
+  
+  - alias: "Eco matin jours travaillés"
+    trigger:
+
+      - platform: time
+        at: input_datetime.eco_on_morning_working_day_time
+
+    condition:
+
+      condition: and
+      conditions:
+
+        - condition: state
+          entity_id: binary_sensor.workday
+          state: 'on'
+
+        - condition: state
+          entity_id: binary_sensor.is_holiday_day
+          state: 'off'
+
+        - condition: state
+          entity_id: binary_sensor.is_teleworking_day
+          state: 'off'
+
+        - condition: state
+          entity_id: binary_sensor.is_exceptional_absence
+          state: 'off'
+          
+    action:
+
+      - service: input_select.select_option
+        data:
+          entity_id:
+            - input_select.thermostat_cuisine_mode
+            - input_select.thermostat_sejour_mode
+          option: 'eco'
