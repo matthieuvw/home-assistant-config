@@ -1,0 +1,19 @@
+
+sensor:
+
+  - platform: rest
+    name: jeedom_temperature_sejour
+    resource: !secret jeedom_temperature_sejour_url
+
+  - platform: rest
+    name: jeedom_temperature_cuisine
+    resource: !secret jeedom_temperature_cuisine_url
+
+  - platform: rest
+    name: jeedom_temperature_salon
+    resource: !secret jeedom_temperature_salon_url
+
+  - platform: rest
+    name: jeedom_temperature_chambre_colin
+    resource: !secret jeedom_temperature_chambre_colin_url
+    

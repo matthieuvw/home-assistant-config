@@ -1,0 +1,50 @@
+
+influxdb:
+
+  host: !secret influxdb_host
+  port: !secret influxdb_port
+  database: 'hass'
+
+  include:
+    domains:
+      - input_number
+      - climate
+      - sensor
+      
+  tags:
+    instance: !secret instance
+    source: hass
+
+# Template sensors for mappping
+# states string to numeric value
+# in order to report to grafana/influxdb
+
+sensor:
+
+  - platform: template
+    sensors:
+
+      climate_thermostat_salon_numeric_state:
+        value_template: >
+          {% if state_attr("climate.thermostat_salon", "hvac_action") == "heating" %} 1
+          {% else %} 0
+          {% endif %}
+
+      climate_thermostat_cuisine_numeric_state:
+        value_template: >
+          {% if state_attr("climate.thermostat_cuisine", "hvac_action") == "heating" %} 1
+          {% else %} 0
+          {% endif %}
+
+      climate_thermostat_sejour_numeric_state:
+        value_template: >
+          {% if state_attr("climate.thermostat_sejour", "hvac_action") == "heating" %} 1
+          {% else %} 0
+          {% endif %}
+
+      climate_thermostat_chambre_colin_numeric_state:
+        value_template: >
+          {% if state_attr("climate.thermostat_chambre_colin", "hvac_action") == "heating" %} 1
+          {% else %} 0
+          {% endif %}
+          
