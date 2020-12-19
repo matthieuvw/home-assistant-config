@@ -22,7 +22,6 @@ climate:
     target_sensor: sensor.jeedom_temperature_salon
     min_temp: 12
     max_temp: 25
-    target_temp: 20
     away_temp: 15
     precision: 0.1
     cold_tolerance: 0
@@ -35,7 +34,6 @@ climate:
     target_sensor: sensor.jeedom_temperature_cuisine
     min_temp: 12
     max_temp: 25
-    target_temp: 20
     away_temp: 15
     precision: 0.1
     cold_tolerance: 0
@@ -48,7 +46,6 @@ climate:
     target_sensor: sensor.jeedom_temperature_sejour
     min_temp: 12
     max_temp: 25
-    target_temp: 20
     away_temp: 15
     precision: 0.1
     cold_tolerance: 0
@@ -61,7 +58,6 @@ climate:
     target_sensor: sensor.jeedom_temperature_chambre_colin
     min_temp: 12
     max_temp: 25
-    target_temp: 20
     away_temp: 15
     precision: 0.1
     cold_tolerance: 0
