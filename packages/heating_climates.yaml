@@ -23,11 +23,11 @@ climate:
     min_temp: 12
     max_temp: 25
     target_temp: 20
-    away_temp: 17
+    away_temp: 15
+    precision: 0.1
     cold_tolerance: 0
-    hot_tolerance: 1
-    min_cycle_duration:
-      seconds: 4
+    hot_tolerance: 0
+    min_cycle_duration: 5
 
   - platform: generic_thermostat
     name: thermostat_cuisine
@@ -36,11 +36,11 @@ climate:
     min_temp: 12
     max_temp: 25
     target_temp: 20
-    away_temp: 17
+    away_temp: 15
+    precision: 0.1
     cold_tolerance: 0
-    hot_tolerance: 1
-    min_cycle_duration:
-      seconds: 4
+    hot_tolerance: 0
+    min_cycle_duration: 5
 
   - platform: generic_thermostat
     name: thermostat_sejour
@@ -49,11 +49,11 @@ climate:
     min_temp: 12
     max_temp: 25
     target_temp: 20
-    away_temp: 17
+    away_temp: 15
+    precision: 0.1
     cold_tolerance: 0
-    hot_tolerance: 1
-    min_cycle_duration:
-      seconds: 4
+    hot_tolerance: 0
+    min_cycle_duration: 5
 
   - platform: generic_thermostat
     name: thermostat_chambre_colin
@@ -62,10 +62,8 @@ climate:
     min_temp: 12
     max_temp: 25
     target_temp: 20
-    away_temp: 17
+    away_temp: 15
+    precision: 0.1
     cold_tolerance: 0
-    hot_tolerance: 1
-    min_cycle_duration:
-      seconds: 4
-
-
+    hot_tolerance: 0
+    min_cycle_duration: 5
