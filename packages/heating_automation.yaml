@@ -75,11 +75,48 @@ automation:
   #
   #
   
-  - alias: "Confort jours travaillés"
+  - alias: "Confort matin jours travaillés"
     trigger:
 
       - platform: time
         at: input_datetime.confort_on_morning_working_day_time_computed
+
+    condition:
+
+      condition: and
+      conditions:
+
+        - condition: state
+          entity_id: binary_sensor.workday
+          state: 'on'
+
+        - condition: state
+          entity_id: binary_sensor.is_holiday_day
+          state: 'off'
+
+        - condition: state
+          entity_id: binary_sensor.is_teleworking_day
+          state: 'off'
+
+        - condition: state
+          entity_id: binary_sensor.is_exceptional_absence
+          state: 'off'
+
+    action:
+
+      - service: input_select.select_option
+        data:
+          entity_id:
+            - input_select.thermostat_cuisine_mode
+            - input_select.thermostat_sejour_mode
+          option: 'confort'
+
+  #
+  #
+  #
+  
+  - alias: "Confort soir jours travaillés"
+    trigger:
 
       - platform: time
         at: input_datetime.confort_on_afternoon_working_day_time
@@ -110,6 +147,7 @@ automation:
       - service: input_select.select_option
         data:
           entity_id:
+            - input_select.thermostat_salon_mode
             - input_select.thermostat_cuisine_mode
             - input_select.thermostat_sejour_mode
           option: 'confort'
