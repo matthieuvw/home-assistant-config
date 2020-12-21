@@ -1,23 +1,23 @@
 
+logger:
+  default: info
+  
 homeassistant:
 
-  name: Mama
+  name: mama
   latitude: !secret latitude
   longitude: !secret longitude
   unit_system: metric
   time_zone: !secret time_zone
   external_url: !secret external_url
   internal_url: !secret internal_url
-
   packages: !include_dir_named packages
 
-# Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
         
 lovelace:
 
   mode: storage
-  # add resource /local/simple-thermostat.js?v=1
 
   dashboards:
 
@@ -29,13 +29,7 @@ lovelace:
       icon: mdi:radiator
       show_in_sidebar: true
 
-logger:
-  default: info
-
 python_script:
-
-meteo_france:
-  - city: !secret wheater_city
 
 frontend:
 

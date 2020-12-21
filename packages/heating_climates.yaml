@@ -19,7 +19,7 @@ climate:
   - platform: generic_thermostat
     name: thermostat_salon
     heater: input_boolean.fil_pilote_salon
-    target_sensor: sensor.jeedom_temperature_salon
+    target_sensor: sensor.salon_temperature
     min_temp: 12
     max_temp: 25
     away_temp: 15
@@ -31,7 +31,7 @@ climate:
   - platform: generic_thermostat
     name: thermostat_cuisine
     heater: input_boolean.fil_pilote_cuisine
-    target_sensor: sensor.jeedom_temperature_cuisine
+    target_sensor: sensor.cuisine_temperature
     min_temp: 12
     max_temp: 25
     away_temp: 15
@@ -43,7 +43,7 @@ climate:
   - platform: generic_thermostat
     name: thermostat_sejour
     heater: input_boolean.fil_pilote_sejour
-    target_sensor: sensor.jeedom_temperature_sejour
+    target_sensor: sensor.sejour_temperature
     min_temp: 12
     max_temp: 25
     away_temp: 15
@@ -55,7 +55,7 @@ climate:
   - platform: generic_thermostat
     name: thermostat_chambre_colin
     heater: input_boolean.fil_pilote_chambre_colin
-    target_sensor: sensor.jeedom_temperature_chambre_colin
+    target_sensor: sensor.chambre_colin_temperature
     min_temp: 12
     max_temp: 25
     away_temp: 15

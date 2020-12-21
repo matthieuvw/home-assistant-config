@@ -47,4 +47,13 @@ sensor:
           {% if state_attr("climate.thermostat_chambre_colin", "hvac_action") == "heating" %} 1
           {% else %} 0
           {% endif %}
-          
+
+group:
+
+  influxdb_customs:
+    name: InfluxDB customs
+    entities:
+      - sensor.climate_thermostat_salon_numeric_state
+      - sensor.climate_thermostat_cuisine_numeric_state
+      - sensor.climate_thermostat_sejour_numeric_state
+      - sensor.climate_thermostat_chambre_colin_numeric_state

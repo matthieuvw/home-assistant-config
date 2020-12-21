@@ -1,0 +1,66 @@
+
+sensor:
+
+  # TODO : Migrate Jeedom sensors to EnOcean sensors
+
+  - platform: rest
+    name: jeedom_temperature_sejour
+    resource: !secret jeedom_temperature_sejour_url
+
+  - platform: rest
+    name: jeedom_temperature_cuisine
+    resource: !secret jeedom_temperature_cuisine_url
+
+  - platform: rest
+    name: jeedom_temperature_salon
+    resource: !secret jeedom_temperature_salon_url
+
+  - platform: rest
+    name: jeedom_temperature_chambre_colin
+    resource: !secret jeedom_temperature_chambre_colin_url
+
+  # TODO set offsets when migrating to EnOcean sensors
+
+  - platform: template
+    sensors:
+
+      home_external_temperature:
+        value_template: >-
+          {% if (states.weather | count) > 0 %}
+            {{ (states.weather | first).attributes.temperature }}
+          {% endif %}
+
+      # +0.26
+      sejour_temperature:
+        value_template: "{{ (states('sensor.jeedom_temperature_sejour') | float + 0.00) | round(2) }}"
+
+      # +1.12
+      cuisine_temperature:
+        value_template: "{{ (states('sensor.jeedom_temperature_cuisine') | float + 0.00) | round(2) }}"
+
+      # +0.8
+      salon_temperature:
+        value_template: "{{ (states('sensor.jeedom_temperature_salon') | float + 0.00) | round(2) }}"
+
+      # TODO offset à déterminer
+      chambre_colin_temperature:
+        value_template: "{{ (states('sensor.jeedom_temperature_chambre_colin') | float + 0.00) | round(2) }}"
+
+group:
+
+  jeedom_temperatures:
+    name: Températures Jeedom
+    entities:
+      - sensor.jeedom_temperature_sejour
+      - sensor.jeedom_temperature_cuisine
+      - sensor.jeedom_temperature_salon
+      - sensor.jeedom_temperature_chambre_colin
+
+  home_temperatures:
+    name: Températures de la maison
+    entities:
+      - sensor.sejour_temperature
+      - sensor.cuisine_temperature
+      - sensor.salon_temperature
+      - sensor.chambre_colin_temperature
+      - sensor.home_external_temperature

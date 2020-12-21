@@ -21,10 +21,10 @@ automation:
       data:
         time_entity_id: input_datetime.confort_on_non_working_day_time
         computed_time_entity_id: input_datetime.confort_on_non_working_day_time_computed
-        external_temperature_entity_id: sensor.ostricourt_temperature
+        external_temperature_entity_id: sensor.home_external_temperature
 
     - service: python_script.smart_start_compute
       data:
         time_entity_id: input_datetime.confort_on_morning_working_day_time
         computed_time_entity_id: input_datetime.confort_on_morning_working_day_time_computed
-        external_temperature_entity_id: sensor.ostricourt_temperature
+        external_temperature_entity_id: sensor.home_external_temperature

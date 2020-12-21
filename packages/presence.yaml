@@ -75,3 +75,14 @@ binary_sensor:
               or is_state('binary_sensor.is_teleworking_day', 'on')
               or is_state('binary_sensor.workday', 'off')
             ) }}
+
+group:
+
+  presence:
+    name: Présences
+    entities:
+      - binary_sensor.workday
+      - binary_sensor.is_holiday_day
+      - binary_sensor.is_teleworking_day
+      - binary_sensor.is_exceptional_absence
+      - binary_sensor.presence
