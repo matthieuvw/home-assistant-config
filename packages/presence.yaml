@@ -50,21 +50,15 @@ binary_sensor:
       
       is_holiday_day:
         friendly_name: "Sommes-nous en vacances ?"
-        value_template: >-
-          as_timestamp(now()) >= as_timestamp(strptime(states.input_datetime.holiday_begin_date.state, '%Y-%m-%d'))
-          and as_timestamp(now()) <= as_timestamp(strptime(states.input_datetime.holiday_end_date.state + ' 23:59:59', '%Y-%m-%d %H:%M:%S'))
+        value_template: "{{ is_state('binary_sensor.workday', 'on') and state_attr('input_datetime.holiday_begin_date', 'timestamp') <= as_timestamp(now()) < state_attr('input_datetime.holiday_end_date', 'timestamp') + 24*3600 }}"
 
       is_teleworking_day:
         friendly_name: "Sommes-nous un jour de télétravail ?"
-        value_template: >-
-          as_timestamp(now()) >= as_timestamp(strptime(states.input_datetime.teleworking_begin_date.state, '%Y-%m-%d'))
-          and as_timestamp(now()) <= as_timestamp(strptime(states.input_datetime.teleworking_end_date.state + ' 23:59:59', '%Y-%m-%d %H:%M:%S'))
-      
+        value_template: "{{ is_state('binary_sensor.workday', 'on') and state_attr('input_datetime.teleworking_begin_date', 'timestamp') <= as_timestamp(now()) < state_attr('input_datetime.teleworking_end_date', 'timestamp') + 24*3600 }}"
+
       is_exceptional_absence:
         friendly_name: "Sommes-nous absent exceptionnellement ?"
-        value_template: >-
-          as_timestamp(now()) >= as_timestamp(strptime(states.input_datetime.exceptional_absence_begin_date.state, '%Y-%m-%d'))
-          and as_timestamp(now()) <= as_timestamp(strptime(states.input_datetime.exceptional_absence_end_date.state + ' 23:59:59', '%Y-%m-%d %H:%M:%S'))
+        value_template: "{{ state_attr('input_datetime.exceptional_absence_begin_date', 'timestamp') <= as_timestamp(now()) < state_attr('input_datetime.exceptional_absence_end_date', 'timestamp') + 24*3600 }}"
 
       presence:
         friendly_name: "Présence"
