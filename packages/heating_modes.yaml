@@ -3,6 +3,34 @@
 # Modes
 #
 
+homeassistant:
+
+  customize:
+
+    input_select.thermostat_salon_mode:
+      climate_id: climate.thermostat_salon
+      setpoints_id:
+        confort: input_number.thermostat_salon_mode_confort
+        eco: input_number.thermostat_salon_mode_eco
+
+    input_select.thermostat_cuisine_mode:
+      climate_id: climate.thermostat_cuisine
+      setpoints_id:
+        confort: input_number.thermostat_cuisine_mode_confort
+        eco: input_number.thermostat_cuisine_mode_eco
+
+    input_select.thermostat_sejour_mode:
+      climate_id: climate.thermostat_sejour
+      setpoints_id:
+        confort: input_number.thermostat_sejour_mode_confort
+        eco: input_number.thermostat_sejour_mode_eco
+
+    input_select.thermostat_chambre_colin_mode:
+      climate_id: climate.thermostat_chambre_colin
+      setpoints_id:
+        confort: input_number.thermostat_chambre_colin_mode_confort
+        eco: input_number.thermostat_chambre_colin_mode_eco
+
 input_select:
 
   thermostat_salon_mode:
@@ -115,15 +143,14 @@ automation:
         - input_select.thermostat_sejour_mode
         - input_select.thermostat_chambre_colin_mode
 
-  condition: "{{ trigger.entity_id | regex_match('input_select.thermostat_[\\w_]+_mode') }}"
-
   action:
 
     - service: climate.set_temperature
       data:
         entity_id: >
-          {{ 'climate.' + trigger.entity_id.split('.')[1].replace('_mode', '') }}
+          {{ state_attr(trigger.entity_id, 'climate_id') }}
         temperature: >
-          {{ states('input_number.' + trigger.entity_id.split('.')[1] + '_' + states(trigger.entity_id)) | float }}
+          {{ states(state_attr(trigger.entity_id, 'setpoints_id')[trigger.to_state.state]) }}
+          
 
   mode: parallel
