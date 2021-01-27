@@ -29,6 +29,14 @@ lovelace:
       icon: mdi:radiator
       show_in_sidebar: true
 
+    presence-dashboard:
+
+      title: Présence
+      filename: dashboards/presence.yaml
+      mode: yaml
+      icon: mdi:home-import-outline
+      show_in_sidebar: true
+
 python_script:
 
 frontend:

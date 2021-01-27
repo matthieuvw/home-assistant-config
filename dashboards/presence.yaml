@@ -1,0 +1,21 @@
+views:
+  - title: Contrôles
+    path: controles
+    panel: true
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.workday
+                name: Sommes-nous un jour travaillé ?
+              - entity: binary_sensor.is_holiday_day
+                name: Sommes-nous en vacances ?
+              - entity: binary_sensor.is_teleworking_day
+                name: Sommes-nous en télétravail ?
+              - entity: binary_sensor.is_exceptional_absence
+                name: Sommes-nous absent exceptionnellement ?
+              - entity: binary_sensor.presence
+                name: Sommes-nous présents ?
+            title: Calcul jours travaillés

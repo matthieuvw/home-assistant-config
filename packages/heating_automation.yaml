@@ -208,4 +208,4 @@ automation:
             - input_select.thermostat_cuisine_mode
             - input_select.thermostat_sejour_mode
           option: 'eco'
-          
+            
