@@ -13,6 +13,9 @@ homeassistant:
   internal_url: !secret internal_url
   packages: !include_dir_named packages
 
+recorder:
+  db_url: !secret db_url
+
 default_config:
         
 lovelace:
